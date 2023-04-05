@@ -23,7 +23,8 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        $category = Category::create($request->validated());
+
+        $category = auth()->user()->categories()->create($request->validated());//Category::create(+['user_id'=> auth()->id]);
 
         return new CategoryResource($category);
     }
